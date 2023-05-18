@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <style>
+       html, body {
+
+            margin: 0;
+
+            height: 100%;
+
+            overflow: hidden;
+
+            background-color: #025464;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .post_box{
+            width: 90%;
+            height: 100%;
+            padding: 10px 10px 10px 10px;
+            margin: 10px 0px 10px 0px;
+            background-color:  #f6d743;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+
+        }
+
+        .btn_insert{
+            width: 80%;
+            height: 5%;
+
+            margin-top: 20px;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+    <script>
+        function insert(){
+            let name = $('#name').val()
+            let age = $('#age').val()
+            let mbti = $('#mbti').val()
+            let img = $('#img').val()
+            let email = $('#email').val()
+            let pros = $('#pros').val()
+            let skill = $('#skill').val()
+            let goal = $('#goal').val()
+            let comment = $('#comment').val()
+
+            let formData = new FormData();
+            formData.append("name_give", name);
+            formData.append("age_give", age);
+            formData.append("mbti_give", mbti);
+            formData.append("img_give", img);
+            formData.append("email_give", email);
+            formData.append("pros_give", pros);
+            formData.append("skill_give", skill);
+            formData.append("goal_give", goal);
+            formData.append("comment_give", comment);
+
+
+            fetch('/reviews', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
+                opener.parent.location = "/";
+                window.close();
+            });
+
+        }
+
+        function cancel(){
+            window.close();
+        }
+    </script>
+</head>
+    
+<body>
+
+    <div class="post_box" style="border-radius: 20px;">
+       <!-- <div class="insert">
+        <label>이름
+        <input type="text" id="name"/>
+        </label>
+       </div> -->
+       <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">이름</span>
+        <input type="text" id="name" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+       <!-- <div class="insert">
+        <label>나이
+        <input type="text" id="age"/>
+        </label>
+       </div> -->
+       <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">나이</span>
+        <input type="text" id="age" class="form-control" placeholder="Userage" aria-label="Userage" aria-describedby="basic-addon1">
+       </div>
+       <!-- <div class="insert">
+        <label>MBTI
+        <input type="text" id="mbti"/>
+        </label>
+       </div> -->
+       <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">MBTI</span>
+        <input type="text" id="mbti" class="form-control" placeholder="UserMBTI" aria-label="UserMBTI" aria-describedby="basic-addon1">
+       </div>
+       <!-- <div class="insert">
+        <label>사진
+        <input type="url" id="img"/>
+        </label>
+       </div> -->
+       <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">IMG LINK</span>
+        <input type="text" id="img" class="form-control" placeholder="IMG LINK" aria-label="IMG LINK" aria-describedby="basic-addon1">
+       </div>
+       <!-- <div class="insert">
+        <label>메일
+        <input id="email" type="email"placeholder="name@example.com"/>
+        </label>
+       </div> -->
+       <div class="input-group mb-3">
+        <input type="text" id="email"class="form-control" placeholder="name@example.com" aria-label="name@example.com" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2">@example.com</span>
+      </div>
+       <!-- <div class="insert">
+        <label for="skill">나의 스킬</label>
+        <textarea id="skill" placeholder="my Skill"></textarea>
+       </div> -->
+
+       <div class="input-group">
+        <span class="input-group-text">나의 장점</span>
+        <textarea class="form-control" id="pros" aria-label="With textarea"></textarea>
+       </div>
+
+       <div class="input-group">
+        <span class="input-group-text">나의 스킬</span>
+        <textarea class="form-control" id="skill" aria-label="With textarea"></textarea>
+       </div>
+       <!-- <div class="insert">
+        <label for="goal"> 나의 목표</label>
+        <textarea id="goal" placeholder="my goall"></textarea>
+       </div> -->
+       <div class="input-group">
+        <span class="input-group-text">나의 목표</span>
+        <textarea class="form-control" id="goal" aria-label="With textarea"></textarea>
+       </div>
+
+       <div class="input-group">
+        <span class="input-group-text">각오 및 한마디</span>
+        <textarea class="form-control" id="comment" aria-label="With textarea"></textarea>
+       </div>
+
+        <div class="btn_insert">  
+        <!-- <button onclick="insert()">입력</button> -->
+        <button type="button" class="btn btn-outline-dark" onclick="insert()" >입력</button>
+        <!-- <button onclick="cancel()">취소</button> -->
+        <button type="button" class="btn btn-outline-dark" onclick="cancel()" >취소</button>
+       </div>
+
+    </div>
+   
+</body>
+</html>

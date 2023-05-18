@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background-color: #f6d743;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .intro {
+            background-color: #E8AA42;
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+            font-family: 'Gamja Flower', cursive;
+            border-radius: 20px;
+            padding-left: 5px;
+        }
+
+        .team_name {
+            text-align: center;
+            width: 150px;
+            height: 50px;
+            font-family: 'Gamja Flower', cursive;
+            text-shadow: 1px 1px 1px black;
+            color: #06623b;
+            margin-bottom: -10px;
+        }
+
+        .team_list {
+            display: inline-block;
+            background-color: violet;
+            overflow: scroll;
+            font-size: 20px;
+        }
+        .team_list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .team_prms {
+            float: right;
+            background-color: coral;
+            margin-left: 5px;
+        }
+
+        .prms_list {
+            margin-top: 10px;
+            height: 500px;
+            width: 49%;
+            font-family: 'Gamja Flower', cursive;
+            background-color: #025464;
+            border-radius: 20px;
+        }
+        .team_prms_txt1 {
+            font-size: 25px;
+            padding: 22px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 30px;
+            background-color: #E57C23;
+        }
+
+        .team_prms_txt2 {
+            padding: auto 0px auto 0px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 30px;
+            font-size: 20px;
+            background-color: #E57C23;
+        }
+
+        .member_intro {
+            text-align: center;
+            border-radius: 10px;
+            width: auto;
+            margin: 30px;
+            height: 81.5px;
+            font-size: 25px;
+            background-color: #E57C23;
+        }
+
+        .intro_txt {
+            text-align: left;
+        }
+        .container > img {
+            width: 50px;
+            height: 50px;
+        }
+        .member_intro > p {
+            font-size: 15px;
+        }
+        body {
+            background-color: #F8F1F1;
+            padding: 10px;
+        }
+        .container, .intro, .team_list, .team_prms {
+            border: 2px solid;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            set_member();
+        });
+
+        function set_member(){
+            fetch('/reviews').then((res) => res.json()).then((data) => {
+                let rows = data['result']
+                $('#member_list').empty();
+                rows.forEach((a) => {
+                    let img = a['img']
+                    let name = a['name']
+                    let goal = a['goal']
+
+                    let temp_html = `<div class="card mb-3" style="max-width: 100%; margin-top: 10px;" id="member_list">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="${img}"
+                                                    class="img-fluid rounded-start" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <a href="/self_introduction_name?name=${name}" style="text-decoration-line: none; color: black; font-size:35px;">${name}</a>
+                                                    <p class="card-text" style="font-size:25px;">${goal}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`
+
+                    $('#member_list').append(temp_html)
+
+                })
+
+            })
+        }
+
+        function open_box() {
+                popupWindow = window.open("reviews/information", "title", "resizeable");
+                popupWindow.resizeTo(430, 800);
+                popupWindow.onresize = (_ => {
+                popupWindow.resizeTo(430, 800);
+            })
+        }
+    </script>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    <div class="container">
+        <img src="https://i.postimg.cc/PrThWC0V/mojito.png" onclick="location.href='/'" style="cursor:pointer">
+        <h1 class="team_name">스린이들 !</h1>
+    </div>
+    <div class="intro">
+        <h2 class="intro_txt">팀 소개 및 목표</h2>
+        <p class="intro_txt" style="font-size: 20px;"><span style="color: red; font-size: 30px;">#팀 소개!</span></p>
+        <p style="font-size: 20px; margin-left: 5px;">안녕하세요! 저희 팀은 스파르타 코딩클럽에서 스프링에 입문을 한 뉴비들이 모인 팀입니다! </p>
+        <p class="intro_txt" style="font-size: 20px;"><span style="color: red; font-size: 30px;">#팀 목표!</span></p>
+        <p style="font-size: 20px; margin-left: 5px;">이번 미니 프로젝트를 통해 웹개발에 익숙해지고 CRUD를 확실하게 구현하는것! </p>
+    </div>
+    <div class="team_list prms_list" style="background-color: #025464;">
+        <div class="member_intro">
+            팀소개
+            <p>이름을 누르면 해당 팀원의 프로필로 들어가져요!</p>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="jqbtn">
+                <button class="btn btn-dark me-md-2" type="button" onclick="open_box()" style="position: sticky; top: 10px;">추가</button>
+            </div>
+          </div>
+            <div class="row g-0" id="member_list" style="max-width: 100%;">
+                <div class="col-md-4">
+                    <img src="..."
+                        class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <a class="name">최종용></a>
+                        <p class="card-text">goal</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="team_prms prms_list">
+        <div class="team_prms_txt1">스린이들 규칙!</div>
+        <div class="team_prms_txt2">
+            <p>1. 급한 일정이나 급하게 빠져야 할 땐 꼭</p>
+            <p>매니저님과 팀원들에게 알리기!</p>
+            <p>2. 회의할때 한개이상 아이디어 제의하기!</p>
+            <p>3. 모르는거 있으면 팀원들에게 공유하고 함께 고민하기</p>
+        </div>
+    </div>
+</body>
+
+</html>

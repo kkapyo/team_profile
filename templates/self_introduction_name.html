@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+        #myimg {
+            background-color: white;
+            border: 1px solid;
+            width: 300px;
+            height: 300px;
+            padding: 30px 0px 0px 0px;
+            background-image: url({{img}});
+            background-position: center;
+            background-size: cover;
+        }
+        .box {
+            background-color: #E8AA42;
+            color: black;
+            display: flex;
+            flex-direction: row;
+            font-family: 'Gamja Flower', cursive;
+            border-radius: 20px;
+        }
+        .item:nth-child(1) {
+            flex-basis: 30%;
+        }
+        .item:nth-child(2) {
+            flex-basis: 50%;
+        }
+        .item:nth-child(3) {
+            flex-basis: 30%;
+        }
+        .box2 {
+            background-color: #025464;
+            color: white;
+            text-align: start;
+            margin-top: 10px;
+            padding: 5px 5px 200px;
+            font-family: 'Gamja Flower', cursive;
+            font-size: 30px;
+            border-radius: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background-color: #f6d743;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .team_name {
+            text-align: center;
+            font-family: 'Gamja Flower', cursive;
+            text-shadow: 1px 1px 1px black;
+            color: #06623b;
+            margin-bottom: -10px;
+        }
+        .item {
+           border-radius: 20px; 
+           margin: 10px;
+        }
+        .container > img {
+            width: 50px;
+            height: 50px;
+        }
+        body {
+            background-color: #F8F1F1;
+            padding: 10px;
+        }
+        .container, .box, .box2 {
+            border: 2px solid black;;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.postimg.cc/PrThWC0V/mojito.png" onclick="location.href='/'" style="cursor:pointer">
+        <h1 class="team_name">스린이 {{name}} !</h1>
+    </div>
+    <div class="box">
+        <div id="myimg" class="item">
+        </div>
+        <div class="item">
+            <p style="font-size: 30px;">이름: {{name}}</p>
+            <p>나이: {{age}} </p>
+            <p>MBTI: <span style="color: rgb(248, 53, 53);">{{mbti}}</span></p>
+            <p>장점: {{pros}} </p>
+            <p><img src="https://cdn.icon-icons.com/icons2/2098/PNG/512/mail_icon_128820.png"
+                    style="width: 30px; height: 30px; margin-bottom: -7px;"> {{email}} </p>
+            <p>skill: {{skill}}</p>
+            <p>목표: {{goal}} </p>
+        </div>
+        <div class="item">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-2" type="button"
+                    onclick="location.href='/update_page?name={{name}}&id={{id}}'">수정</button>
+            </div>
+        </div>
+    </div>
+    <div class="box2">
+        <p>각오 및 한마디:</p>
+        <p style="font-size: 20px;">{{comment}}</p>
+    </div>
+</body>
+</html>
